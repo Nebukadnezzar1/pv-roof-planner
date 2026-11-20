@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PV Roof Planner</title>
+<meta name="description" content="Open-source 3D shading analysis, PV module layout and string planning for pitched roofs – runs entirely in the browser.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 18 16 6l14 12' fill='none' stroke='%23b4553b' stroke-width='3'/%3E%3Crect x='9' y='15' width='14' height='10' fill='%231d2f4d'/%3E%3Ccircle cx='26' cy='6' r='4' fill='%23f7b500'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 18 16 6l14 12" fill="none" stroke="#e07a5f" stroke-width="3"/><rect x="9" y="15" width="14" height="10" fill="#9ec5ff"/><circle cx="26" cy="6" r="4" fill="#f7b500"/></svg><span>PV Roof Planner</span></div>
+  <input id="projName" class="projname" aria-label="Project name">
+  <div class="actions">
+    <button data-act="new" data-i18n="act_new"></button>
+    <button data-act="open" data-i18n="act_open"></button>
+    <button data-act="save" data-i18n="act_save"></button>
+    <button data-act="example" data-i18n="act_example"></button>
+    <select id="lang" aria-label="Language"><option value="de">DE</option><option value="en">EN</option></select>
+    <a class="btnlink" href="docs/ANLEITUNG.md" target="_blank" rel="noopener" data-i18n="act_help"></a>
+  </div>
+  <input type="file" id="fileOpen" accept=".json,application/json" hidden>
+</header>
+
+<main class="layout">
+  <aside class="side" id="side"></aside>
+
+  <section class="stage">
+    <nav class="tabs" role="tablist">
+      <button data-tab="3d" class="on" data-i18n="tab_3d"></button>
+      <button data-tab="faces" data-i18n="tab_faces"></button>
+      <button data-tab="site" data-i18n="tab_site"></button>
+      <button data-tab="shade" data-i18n="tab_shade"></button>
+      <button data-tab="result" data-i18n="tab_result"></button>
+    </nav>
+
+    <div class="pane on" data-pane="3d">
+      <div class="glwrap">
+        <canvas id="gl"></canvas>
+        <div id="labels"></div>
+        <div class="viewbtns">
+          <button data-view="iso">3D</button><button data-view="top" data-i18n="view_top"></button>
+          <button data-view="N">N</button><button data-view="E" data-i18n="dir_E"></button><button data-view="S">S</button><button data-view="W">W</button>
+          <button data-act="fullscreen" title="Fullscreen">⛶</button>
+        </div>
+        <div class="glmsg" id="glmsg" hidden></div>
+      </div>
+      <div class="sunbar">
+        <label class="chk"><input type="checkbox" id="sunOn"> <span data-i18n="sun_on"></span></label>
+        <label class="rng"><span data-i18n="sun_date"></span><input type="range" id="sunDay" min="0" max="364" value="171"></label>
+        <label class="rng"><span data-i18n="sun_time"></span><input type="range" id="sunMin" min="240" max="1320" step="5" value="780"></label>
+        <button id="sunPlay" data-i18n="sun_play"></button>
+        <span class="suninfo" id="sunInfo"></span>
+        <label class="sel"><span data-i18n="color_mode"></span>
+          <select id="colorMode">
+            <option value="plain" data-i18n="cm_plain"></option>
+            <option value="loss" data-i18n="cm_loss"></option>
+            <option value="strings" data-i18n="cm_strings"></option>
+          </select></label>
+        <label class="chk"><input type="checkbox" id="showCables"> <span data-i18n="show_cables"></span></label>
+        <label class="chk"><input type="checkbox" id="showLabels" checked> <span data-i18n="show_labels"></span></label>
+      </div>
+      <p class="hint" data-i18n="hint_click"></p>
+    </div>
+
+    <div class="pane" data-pane="faces">
+      <div class="paneHead">
+        <label class="sel"><span data-i18n="color_mode"></span>
+          <select id="faceMode"><option value="plain" data-i18n="cm_plain"></option><option value="loss" data-i18n="cm_loss"></option><option value="strings" data-i18n="cm_strings"></option></select></label>
+        <button data-act="restore" data-i18n="act_restore"></button>
+        <button data-act="freeze" id="freezeBtn"></button>
+        <button data-act="svg" data-i18n="act_svg"></button>
+      </div>
+      <div id="faceWarn" class="warn" hidden></div>
+      <div class="faces" id="faces"></div>
+    </div>
+
+    <div class="pane" data-pane="site">
+      <div class="paneHead"><button data-act="osm" data-i18n="act_osm"></button><span class="hint" data-i18n="site_hint"></span></div>
+      <div id="site" class="sitewrap"></div>
+    </div>
+
+    <div class="pane" data-pane="shade">
+      <div class="paneHead">
+        <label class="sel"><span data-i18n="heat_sel"></span><select id="heatSel"></select></label>
+        <span class="legend"><i class="lg0"></i><span data-i18n="lg_sun"></span><i class="lg1"></i><span data-i18n="lg_shade"></span><i class="lg2"></i><span data-i18n="lg_nosun"></span></span>
+      </div>
+      <div class="stale" data-stale hidden></div>
+      <canvas id="heat" width="1100" height="380"></canvas>
+      <div id="lossTable" class="tablewrap"></div>
+    </div>
+
+    <div class="pane" data-pane="result">
+      <div class="stale" data-stale hidden></div>
+      <div id="result"></div>
+    </div>
+  </section>
+</main>
+
+<dialog id="osmDialog" class="dlg">
+  <form method="dialog" class="dlgbody" id="osmForm">
+    <h2 data-i18n="osm_title"></h2>
+    <p class="hint" data-i18n="osm_intro"></p>
+    <div class="row">
+      <input id="osmQuery" type="search" data-i18n-ph="osm_search_ph">
+      <button type="button" id="osmSearch" data-i18n="osm_search"></button>
+    </div>
+    <div id="osmHits" class="hits"></div>
+    <div class="row">
+      <label><span>Lat</span><input id="osmLat" type="number" step="0.000001"></label>
+      <label><span>Lon</span><input id="osmLon" type="number" step="0.000001"></label>
+      <label><span data-i18n="osm_radius"></span><input id="osmRad" type="number" value="80" min="20" max="250"></label>
+      <button type="button" id="osmLoad" data-i18n="osm_load"></button>
+    </div>
+    <div class="row modes" id="osmModes">
+      <span data-i18n="osm_click"></span>
+      <label><input type="radio" name="osmMode" value="own" checked> <i class="sw own"></i><span data-i18n="osm_own"></span></label>
+      <label><input type="radio" name="osmMode" value="attached"> <i class="sw att"></i><span data-i18n="osm_att"></span></label>
+      <label><input type="radio" name="osmMode" value="ignore"> <i class="sw ign"></i><span data-i18n="osm_ign"></span></label>
+      <label><input type="radio" name="osmMode" value="neighbor"> <i class="sw nb"></i><span data-i18n="osm_nb"></span></label>
+    </div>
+    <div id="osmMap" class="osmmap"></div>
+    <div class="row">
+      <label class="chk"><input type="checkbox" id="osmAcross"> <span data-i18n="osm_across"></span></label>
+      <span class="hint" id="osmStatus"></span>
+    </div>
+    <p class="attr">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors (ODbL)</p>
+    <div class="dlgact">
+      <button value="cancel" data-i18n="cancel"></button>
+      <button type="button" id="osmApply" class="primary" data-i18n="osm_apply"></button>
+    </div>
+  </form>
+</dialog>
+
+<footer class="foot">
+  <span data-i18n="foot_disclaimer"></span>
+  · <a href="https://github.com/Nebukadnezzar1/pv-roof-planner" id="repoLink" target="_blank" rel="noopener">GitHub</a> · MIT
+</footer>
+
+<script src="js/project.js"></script>
+<script src="js/sun.js"></script>
+<script src="js/geometry.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/shade.js"></script>
+<script src="js/energy.js"></script>
+<script src="js/strings.js"></script>
+<script src="js/plan2d.js"></script>
+<script src="js/render3d.js"></script>
+<script src="js/osm.js"></script>
+<script src="js/export.js"></script>
+<script src="js/i18n.js"></script>
+<script src="examples/example.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

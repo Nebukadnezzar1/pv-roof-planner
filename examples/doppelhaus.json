@@ -1,0 +1,229 @@
+{
+  "name": "Beispiel: Doppelhaushälfte",
+  "site": {
+    "lat": 51,
+    "lon": 10,
+    "timeZone": "Europe/Berlin",
+    "albedo": 0.2
+  },
+  "climate": {
+    "ghi": null,
+    "diffuse": null,
+    "tamb": null,
+    "source": "estimate"
+  },
+  "building": {
+    "azimuthA": 165,
+    "length": 12,
+    "width": 10,
+    "ridgeOffset": 5,
+    "ridgeHeight": 9.4,
+    "pitchA": 38,
+    "pitchB": 38,
+    "overhangA": 0.5,
+    "overhangB": 0.5,
+    "overhangGable": 0.35,
+    "section": {
+      "from": 0,
+      "to": 6
+    }
+  },
+  "obstacles": [
+    {
+      "id": "o1",
+      "face": "A",
+      "kind": "chimney",
+      "label": "",
+      "fromLeft": 3.6,
+      "fromEave": 3.8,
+      "width": 0.5,
+      "depth": 0.5,
+      "top": 10,
+      "clearance": 0.15,
+      "mode": "plan"
+    },
+    {
+      "id": "o2",
+      "face": "A",
+      "kind": "chimney",
+      "label": "",
+      "fromLeft": 7.9,
+      "fromEave": 3.8,
+      "width": 0.5,
+      "depth": 0.5,
+      "top": 10,
+      "clearance": 0.15,
+      "mode": "plan"
+    },
+    {
+      "id": "o3",
+      "face": "A",
+      "kind": "window",
+      "label": "",
+      "fromLeft": 1.2,
+      "fromEave": 2.2,
+      "width": 0.78,
+      "depth": 0.93,
+      "top": 0,
+      "clearance": 0.1,
+      "mode": "plan"
+    },
+    {
+      "id": "o4",
+      "face": "B",
+      "kind": "window",
+      "label": "",
+      "fromLeft": 7.4,
+      "fromEave": 1.8,
+      "width": 0.78,
+      "depth": 0.93,
+      "top": 0,
+      "clearance": 0.1,
+      "mode": "plan"
+    }
+  ],
+  "neighbors": [
+    {
+      "id": "n1",
+      "name": "West",
+      "rect": {
+        "e": -17.4,
+        "n": -4.66,
+        "len": 12,
+        "wid": 10,
+        "rot": 75
+      },
+      "base": 0,
+      "wallHeight": 6.2,
+      "roof": "gable",
+      "ridgeHeight": 9.6,
+      "ridgeDir": "long"
+    },
+    {
+      "id": "n2",
+      "name": "East",
+      "rect": {
+        "e": 17.4,
+        "n": 4.66,
+        "len": 12,
+        "wid": 10,
+        "rot": 75
+      },
+      "base": 0,
+      "wallHeight": 6.2,
+      "roof": "gable",
+      "ridgeHeight": 9.6,
+      "ridgeDir": "long"
+    },
+    {
+      "id": "n3",
+      "name": "Opposite",
+      "rect": {
+        "e": 5.7,
+        "n": -23.5,
+        "len": 11,
+        "wid": 9,
+        "rot": 75
+      },
+      "base": 0.5,
+      "wallHeight": 6.5,
+      "roof": "gable",
+      "ridgeHeight": 10.8,
+      "ridgeDir": "long"
+    },
+    {
+      "id": "n4",
+      "name": "Garage",
+      "rect": {
+        "e": 9.5,
+        "n": -2,
+        "len": 6,
+        "wid": 3.2,
+        "rot": 165
+      },
+      "base": 0,
+      "wallHeight": 2.7,
+      "roof": "flat",
+      "ridgeHeight": 2.7,
+      "ridgeDir": "long"
+    }
+  ],
+  "trees": [
+    {
+      "id": "t1",
+      "e": -8.5,
+      "n": -12.5,
+      "height": 11,
+      "crownRadius": 3.5,
+      "type": "deciduous"
+    }
+  ],
+  "module": {
+    "name": "Generic 450 W, 108 half cells (1762 × 1134)",
+    "long": 1.762,
+    "short": 1.134,
+    "thickness": 0.03,
+    "pmax": 450,
+    "voc": 39.5,
+    "vmp": 33,
+    "imp": 13.65,
+    "isc": 14.4,
+    "tkVoc": -0.25,
+    "tkPmax": -0.3,
+    "noct": 45,
+    "cellsShort": 6,
+    "cellsLong": 18,
+    "halfCut": true,
+    "bypassDiodes": 3,
+    "lift": 0.13
+  },
+  "layout": {
+    "mode": "auto",
+    "orientation": "auto",
+    "align": "grid",
+    "faces": {
+      "A": true,
+      "B": true
+    },
+    "marginEave": 0.3,
+    "marginRidge": 0.3,
+    "marginVerge": 0.35,
+    "marginBoundary": 0.15,
+    "gap": 0.02,
+    "clearanceDefault": 0.15,
+    "disabled": [],
+    "modules": []
+  },
+  "inverter": {
+    "name": "Generic hybrid inverter, 2 MPPT",
+    "trackers": 2,
+    "stringsPerTracker": 2,
+    "vmax": 1000,
+    "vStart": 180,
+    "vmppMin": 160,
+    "vmppMax": 950,
+    "imax": 27,
+    "iscMax": 34,
+    "pmax": 7500,
+    "eta": 0.97,
+    "microPmax": 400,
+    "microEta": 0.965
+  },
+  "electrical": {
+    "tMin": -15,
+    "tCellMax": 70,
+    "otherLosses": 0.1,
+    "crossSection": 6,
+    "rho": 0.0178
+  },
+  "cable": {
+    "face": "A",
+    "p": 1,
+    "down": 6,
+    "inside": 5,
+    "reserve": 0.3
+  },
+  "sim": {
+    "quality": "normal"
+  }
+}

@@ -1,0 +1,185 @@
+/* Translations (de / en). Add a language by copying one block. */
+(function (root) {
+  'use strict';
+  const PVP = root.PVP = root.PVP || {};
+
+  const D = {
+    de: {
+      act_new: 'Neu', act_open: 'Öffnen', act_save: 'Speichern', act_example: 'Beispiel', act_help: 'Anleitung', act_osm: 'Gebäude aus OpenStreetMap…',
+      act_run: 'Jahressimulation starten', act_restore: 'Entfernte Module zurückholen', act_freeze: 'Belegung festhalten', act_unfreeze: 'Belegung wieder automatisch',
+      act_svg: 'SVG', act_print: 'Bericht drucken / PDF', add: 'Hinzufügen', remove: 'Entfernen', cancel: 'Abbrechen', new_project: 'Neues Projekt',
+      tab_3d: '3D-Ansicht', tab_faces: 'Dachflächen', tab_site: 'Lageplan', tab_shade: 'Verschattung', tab_result: 'Ergebnis & Strings',
+      view_top: 'Oben', dir_E: 'O',
+      sun_on: 'Sonne & Schatten', sun_date: 'Datum', sun_time: 'Uhrzeit', sun_play: '▶ Tag', sun_stop: '■ Stopp', sun_el: 'Höhe', sun_az: 'Azimut',
+      color_mode: 'Module einfärben', cm_plain: 'normal / Momentschatten', cm_loss: 'Jahresverlust', cm_strings: 'Strings',
+      show_cables: 'Kabel', show_labels: 'Nummern',
+      hint_click: 'Ziehen = drehen · Rechtsklick/Shift = verschieben · Mausrad = Zoom · Klick auf ein Modul = Modul entfernen.',
+      site_hint: 'Draufsicht mit Nachbargebäuden und Bäumen. Norden ist oben.',
+      heat_sel: 'Anzeige', heat_all: 'Alle Module (Mittel)', lg_sun: 'besonnt', lg_shade: 'verschattet', lg_nosun: 'Sonne hinter der Dachfläche',
+      stale: 'Eingaben wurden geändert – Ergebnis neu berechnen (Schritt 8).',
+      sec_site: 'Standort', sec_site_intro: 'Koordinaten des Gebäudes. Am einfachsten über den OpenStreetMap-Import, der auch die Nachbarhäuser übernimmt.',
+      sec_building: 'Gebäude & Dach', sec_building_intro: 'Satteldach. Seite A ist die Dachfläche, deren Ausrichtung du angibst; Seite B liegt gegenüber. „Links“ = links, wenn man von außen auf Seite A schaut. Maße waagerecht, Wand bis Wand.',
+      sec_obstacles: 'Dachaufbauten', sec_obstacles_intro: 'Kamine, Dachfenster, Lüfter. Abstände waagerecht vom linken Giebel (von außen auf die jeweilige Seite gesehen) und von der Traufwand – wie im Grundriss. „Oberkante“ nur bei Aufbauten, die Schatten werfen (über Gelände).',
+      sec_env: 'Umgebung', sec_env_intro: 'Nachbargebäude und Bäume, die Schatten werfen können. Position relativ zur Mitte deines Hauses: O = Meter nach Osten, N = Meter nach Norden; Drehung = Richtung der langen Seite (° von Norden).',
+      sec_module: 'Module & Belegung', sec_module_intro: 'Daten aus dem Moduldatenblatt. Die Belegung wird automatisch maximiert; einzelne Module lassen sich per Klick entfernen.',
+      sec_inverter: 'Wechselrichter & Strings', sec_inverter_intro: 'MPP-Tracker des Wechselrichters bzw. Ladereglers. Daraus ergeben sich die zulässigen Stringlängen.',
+      sec_climate: 'Klima', sec_climate_intro: 'Monatliche Globalstrahlung (kWh/m²), Diffusanteil und Tagesmitteltemperatur.',
+      sec_run: 'Berechnen', sec_run_intro: 'Jahressimulation im 15- bis 60-Minuten-Raster mit Verschattung jeder Zelle, danach Stringoptimierung.',
+      sub_layout: 'Belegung', sub_cable: 'Kabelweg',
+      f_lat: 'Breitengrad', f_lon: 'Längengrad', f_tz: 'Zeitzone', f_albedo: 'Albedo (Boden)',
+      f_azA: 'Ausrichtung Seite A', h_azA: 'Himmelsrichtung, in die die Dachfläche A „schaut“: 180 = Süd, 90 = Ost, 270 = West.',
+      f_len: 'Länge (Giebel–Giebel)', f_wid: 'Tiefe (Traufe–Traufe)', f_ridgeOff: 'First ab Wand A', f_ridgeH: 'Firsthöhe',
+      f_pitchA: 'Neigung Seite A', f_pitchB: 'Neigung Seite B', f_ovA: 'Dachüberstand A', f_ovB: 'Dachüberstand B', f_ovG: 'Überstand Giebel',
+      f_secFrom: 'Eigener Teil von', f_secTo: 'Eigener Teil bis', h_section: 'Bei Doppel- oder Reihenhäusern: Bereich entlang des Firsts, der dir gehört (ab linkem Giebel, von außen auf Seite A gesehen). Freistehend: 0 bis Länge.',
+      f_modName: 'Modell', f_modLong: 'Länge', f_modShort: 'Breite', f_pmax: 'Nennleistung', f_voc: 'Voc', f_vmp: 'Vmpp', f_imp: 'Impp', f_isc: 'Isc',
+      f_tkVoc: 'TK Voc', f_tkP: 'TK Pmax', f_noct: 'NOCT', f_cellsS: 'Zellen kurze Seite', f_cellsL: 'Zellen lange Seite', f_diodes: 'Bypassdioden', f_halfCut: 'Halbzellen', f_lift: 'Abstand zur Dachhaut',
+      f_orient: 'Ausrichtung', o_auto: 'automatisch (hoch/quer)', o_portrait: 'nur hochkant', o_landscape: 'nur quer', f_align: 'Raster', o_grid: 'Spalten fluchtend', o_pack: 'maximal dicht',
+      f_faceA: 'Seite A belegen', f_faceB: 'Seite B belegen', f_mEave: 'Rand Traufe', f_mRidge: 'Rand First', f_mVerge: 'Rand Ortgang', f_mBound: 'Rand Grenze', f_gap: 'Modulfuge', f_clear: 'Abstand Aufbauten',
+      f_invName: 'Gerät', f_trackers: 'MPP-Tracker', f_spt: 'Strings je Tracker', f_vmax: 'max. Eingangsspannung', f_vstart: 'Startspannung', f_vmppMin: 'MPP-Spannung min.', f_vmppMax: 'MPP-Spannung max.',
+      f_imax: 'max. Strom je Tracker', f_iscMax: 'max. Isc je Tracker', f_pmaxT: 'max. Leistung je Tracker', f_eta: 'Wirkungsgrad', f_tmin: 'tiefste Temperatur', f_tcell: 'max. Zelltemperatur', f_losses: 'sonstige Verluste',
+      f_cFace: 'Kabelaustritt Seite', f_cP: 'Austritt ab linkem Rand', f_cDown: 'Weg an der Fassade', f_cIn: 'Weg innen', f_cs: 'Querschnitt',
+      f_quality: 'Genauigkeit', q_fast: 'schnell (60 min, jeder 4. Tag)', q_normal: 'normal (30 min, jeder 2. Tag)', q_fine: 'fein (15 min, jeder Tag)',
+      run_hint: 'Alle Berechnungen laufen lokal in deinem Browser. Es werden keine Daten hochgeladen.',
+      face_A: 'Seite A', face_B: 'Seite B', modules: 'Module', module: 'Modul',
+      i_orient: 'Ausrichtung', i_slope: 'Sparrenlänge (Traufe–First)', i_eaveH: 'Traufhöhe (Tropfkante)', i_roofLen: 'Dachlänge inkl. Überstand',
+      i_nRange: 'Stringlänge: {a} bis {b} Module', i_parallel: 'Parallele Strings je Tracker: bis {p}',
+      layout_fixed: 'Belegung festgehalten', list_obstacles: 'Aufbauten', list_neighbors: 'Nachbargebäude', list_trees: 'Bäume',
+      empty_obstacles: 'Keine Aufbauten eingetragen.', empty_neighbors: 'Keine Nachbargebäude. Tipp: OpenStreetMap-Import.', empty_trees: 'Keine Bäume eingetragen.',
+      c_face: 'Seite', c_kind: 'Art', c_label: 'Name', c_fromLeft: 'ab Giebel', c_fromEave: 'ab Traufwand', c_width: 'Breite', c_depth: 'Tiefe', c_top: 'Oberkante', c_clear: 'Abstand', c_mode: 'gemessen',
+      c_name: 'Name', c_e: 'O (m)', c_n: 'N (m)', c_rlen: 'Länge', c_rwid: 'Tiefe', c_rrot: 'Drehung', c_base: 'Gelände ±', c_wallH: 'Traufhöhe', c_roof: 'Dach', c_ridgeH: 'Firsthöhe', c_ridgeDir: 'First',
+      c_treeH: 'Höhe', c_crown: 'Kronenradius', c_treeType: 'Art',
+      kind_chimney: 'Kamin', kind_window: 'Dachfenster', kind_vent: 'Lüfter', kind_other: 'Sonstiges', mode_plan: 'waagerecht', mode_roof: 'auf der Dachfläche',
+      roof_gable: 'Satteldach', roof_hip: 'Walmdach', roof_flat: 'Flachdach', rd_long: 'längs', rd_short: 'quer', tree_dec: 'Laubbaum', tree_con: 'Nadelbaum',
+      osm_fp: 'Umriss aus OpenStreetMap', pts: 'Punkte',
+      clim_est: 'Geschätzt aus der geografischen Breite. Für genaue Werte die Monatswerte deines Standorts aus PVGIS eintragen:', clim_own: 'Eigene Werte.',
+      clim_ghi: 'Globalstrahlung', clim_fd: 'Diffusanteil', clim_ta: 'Temperatur', clim_reset: 'Auf Schätzung zurücksetzen', clim_paste: '12 Monatswerte einfügen…', clim_paste_prompt: '12 Monatswerte der Globalstrahlung (kWh/m²) einfügen, z. B. aus PVGIS „H(h)_m“:',
+      eave: 'Traufe', ridge: 'First', confirm_replace: 'Aktuelles Projekt ersetzen? Nicht gespeicherte Änderungen gehen verloren.',
+      warn_layout: 'Module außerhalb der Randabstände oder zu nah an Aufbauten: {list}',
+      no_modules: 'Keine Module auf dem Dach.', no_result: 'Noch kein Ergebnis. Starte die Jahressimulation in Schritt 8 (links).', no_webgl: 'WebGL ist in diesem Browser nicht verfügbar. Die 2D-Pläne und Berechnungen funktionieren trotzdem.',
+      prog_shade: 'Verschattung … {p} %', prog_strings: 'Strings werden optimiert …', prog_done: 'Fertig in {s} s',
+      k_modules: 'Module', k_yield: 'Ertrag', k_per_year: 'pro Jahr (Strings)', k_specific: 'Spezifischer Ertrag', k_shading: 'Verschattungsverlust', k_shading_sub: 'durch Nachbarn, Bäume, Aufbauten', k_micro: 'Modul-MPPT', k_micro_sub: 'Mehrertrag mit Mikro-WR/Optimierern',
+      r_monthly: 'Monatsertrag je Dachseite (kWh)', r_strings: 'Stringplan · {inv}', r_tracker: 'Tracker', r_order: 'Module (Reihenfolge + → −)', r_peak: 'Spitze',
+      r_strings_note: 'Zulässig sind {a} bis {b} Module je String. Die Zuordnung der Module ist auf den Jahresertrag unter Verschattung optimiert.',
+      r_compare: 'Vergleich der Verschaltung', r_variant: 'Variante', r_diff: 'Unterschied', r_v_strings: 'Strings wie oben', r_v_micro: 'jedes Modul mit eigenem MPPT (Mikro-WR/Optimierer)', r_v_unshaded: 'theoretisch ohne jede Verschattung',
+      r_bypass_note: 'Jedes Modul ist in Abschnitte mit Bypassdioden geteilt. Ein Teilschatten überbrückt nur den betroffenen Abschnitt; der String läuft mit vollem Strom weiter. Der Tracker sucht das globale Maximum. Deshalb ist der Abstand zu Modul-MPPT meist klein.',
+      r_cables: 'Kabellängen je String', r_bridge: 'Brücken', r_cable_note: 'Grobe Längen bis zum Wechselrichter inkl. Reserve, Querschnitt {cs} mm². Weg: unter den Modulen zum Austrittspunkt an der Traufe, andere Dachseite über den First.',
+      r_export: 'Export', r_loss: 'Jahresverlust durch Schatten', r_kwh_mod: 'Ertrag mit Modul-MPPT (kWh)',
+      r_method: 'Methode: Sonnenstand nach NOAA, Klarhimmel-Tagesgang skaliert auf die Monatsstrahlung, Hay-Davies-Himmelsmodell, Schattenwurf je Zelle, Bypassdioden-Modell. Ergebnis ist eine Planungsschätzung, kein Ertragsgutachten.',
+      warn_clim: 'Klimadaten sind geschätzt. Für belastbare Erträge PVGIS-Monatswerte in Schritt 7 eintragen.',
+      warn_unassigned: 'Nicht angeschlossen (passt nicht in die Spannungsgrenzen): Module {list}',
+      err_trackers: 'Der Wechselrichter hat zu wenige Tracker oder die Stringgrenzen passen nicht zu den Modulzahlen.', err_file: 'Datei konnte nicht gelesen werden:',
+      csv_face: 'Seite', csv_orient: 'Lage', csv_tracker: 'Tracker', csv_string: 'String', csv_p: 'ab linkem Rand (m)', csv_s: 'ab Traufe entlang Neigung (m)', csv_w: 'Breite (m)', csv_h: 'Länge entlang Neigung (m)', csv_loss: 'Verschattung (%)', csv_kwh: 'Ertrag (kWh)',
+      rep_sub: 'PV-Planung · {lat}, {lon}',
+      osm_title: 'Gebäude aus OpenStreetMap übernehmen', osm_intro: 'Adresse suchen oder Koordinaten eingeben, Gebäude laden und dein Haus anklicken. Alle anderen Gebäude werden als Nachbarn mit geschätzten Höhen übernommen – Höhen bitte prüfen.',
+      osm_search_ph: 'Adresse, z. B. Musterstraße 1, Musterstadt', osm_search: 'Suchen', osm_radius: 'Umkreis (m)', osm_load: 'Gebäude laden',
+      osm_click: 'Klick auf ein Gebäude markiert es als:', osm_own: 'mein Haus / meine Hälfte', osm_att: 'gleiches Dach (angebaut)', osm_ign: 'ignorieren', osm_nb: 'Nachbar',
+      osm_across: 'First quer zur langen Seite', osm_apply: 'Übernehmen', osm_empty: 'Noch keine Gebäude geladen.', osm_searching: 'Suche …', osm_nohit: 'Nichts gefunden.',
+      osm_loading: 'Lade Gebäude …', osm_found: '{n} Gebäude gefunden.', osm_none: 'Keine Gebäude im Umkreis.', osm_err: 'Fehler: {e}', osm_need_own: 'Bitte zuerst dein Haus anklicken.',
+      foot_disclaimer: 'PV Roof Planner – Planungshilfe ohne Gewähr. Statik, Brandschutz und Elektroinstallation durch Fachleute prüfen lassen.'
+    },
+    en: {
+      act_new: 'New', act_open: 'Open', act_save: 'Save', act_example: 'Example', act_help: 'Guide', act_osm: 'Buildings from OpenStreetMap…',
+      act_run: 'Run annual simulation', act_restore: 'Restore removed modules', act_freeze: 'Freeze layout', act_unfreeze: 'Automatic layout again',
+      act_svg: 'SVG', act_print: 'Print report / PDF', add: 'Add', remove: 'Remove', cancel: 'Cancel', new_project: 'New project',
+      tab_3d: '3D view', tab_faces: 'Roof faces', tab_site: 'Site plan', tab_shade: 'Shading', tab_result: 'Results & strings',
+      view_top: 'Top', dir_E: 'E',
+      sun_on: 'Sun & shadows', sun_date: 'Date', sun_time: 'Time', sun_play: '▶ Day', sun_stop: '■ Stop', sun_el: 'Elev.', sun_az: 'Azimuth',
+      color_mode: 'Module colours', cm_plain: 'plain / current shade', cm_loss: 'annual loss', cm_strings: 'strings',
+      show_cables: 'Cables', show_labels: 'Numbers',
+      hint_click: 'Drag = rotate · right-click/shift = pan · wheel = zoom · click a module = remove it.',
+      site_hint: 'Top view with neighbouring buildings and trees. North is up.',
+      heat_sel: 'Show', heat_all: 'All modules (mean)', lg_sun: 'sunlit', lg_shade: 'shaded', lg_nosun: 'sun behind the roof face',
+      stale: 'Inputs changed – recalculate the result (step 8).',
+      sec_site: 'Location', sec_site_intro: 'Coordinates of the building. Easiest via the OpenStreetMap import, which also brings in the neighbouring houses.',
+      sec_building: 'Building & roof', sec_building_intro: 'Gable roof. Face A is the roof face whose orientation you enter; face B is opposite. “Left” = left when looking at face A from outside. Horizontal dimensions, wall to wall.',
+      sec_obstacles: 'Roof fixtures', sec_obstacles_intro: 'Chimneys, roof windows, vents. Horizontal distances from the left gable (seen from outside of that face) and from the eave wall – as in the floor plan. “Top” only for fixtures that cast shadows (above ground).',
+      sec_env: 'Surroundings', sec_env_intro: 'Neighbouring buildings and trees that may cast shadows. Position relative to the centre of your house: E = metres east, N = metres north; rotation = direction of the long side (° from north).',
+      sec_module: 'Modules & layout', sec_module_intro: 'Values from the module datasheet. The layout is maximised automatically; click a module to remove it.',
+      sec_inverter: 'Inverter & strings', sec_inverter_intro: 'MPP trackers of the inverter or charge controller. They define the permitted string lengths.',
+      sec_climate: 'Climate', sec_climate_intro: 'Monthly global horizontal irradiation (kWh/m²), diffuse fraction and mean daily temperature.',
+      sec_run: 'Calculate', sec_run_intro: 'Annual simulation in 15–60 minute steps with shading of every cell, followed by string optimisation.',
+      sub_layout: 'Layout', sub_cable: 'Cable route',
+      f_lat: 'Latitude', f_lon: 'Longitude', f_tz: 'Time zone', f_albedo: 'Ground albedo',
+      f_azA: 'Orientation face A', h_azA: 'Compass direction face A “looks” to: 180 = south, 90 = east, 270 = west.',
+      f_len: 'Length (gable–gable)', f_wid: 'Depth (eave–eave)', f_ridgeOff: 'Ridge from wall A', f_ridgeH: 'Ridge height',
+      f_pitchA: 'Pitch face A', f_pitchB: 'Pitch face B', f_ovA: 'Overhang A', f_ovB: 'Overhang B', f_ovG: 'Gable overhang',
+      f_secFrom: 'Own part from', f_secTo: 'Own part to', h_section: 'Semi-detached / terraced houses: the part along the ridge that belongs to you (from the left gable seen from outside face A). Detached: 0 to length.',
+      f_modName: 'Model', f_modLong: 'Length', f_modShort: 'Width', f_pmax: 'Rated power', f_voc: 'Voc', f_vmp: 'Vmpp', f_imp: 'Impp', f_isc: 'Isc',
+      f_tkVoc: 'TC Voc', f_tkP: 'TC Pmax', f_noct: 'NOCT', f_cellsS: 'Cells short side', f_cellsL: 'Cells long side', f_diodes: 'Bypass diodes', f_halfCut: 'Half-cut cells', f_lift: 'Height above roof',
+      f_orient: 'Orientation', o_auto: 'automatic (portrait/landscape)', o_portrait: 'portrait only', o_landscape: 'landscape only', f_align: 'Grid', o_grid: 'aligned columns', o_pack: 'maximum density',
+      f_faceA: 'Use face A', f_faceB: 'Use face B', f_mEave: 'Margin eave', f_mRidge: 'Margin ridge', f_mVerge: 'Margin verge', f_mBound: 'Margin boundary', f_gap: 'Module gap', f_clear: 'Clearance fixtures',
+      f_invName: 'Device', f_trackers: 'MPP trackers', f_spt: 'Strings per tracker', f_vmax: 'Max. input voltage', f_vstart: 'Start voltage', f_vmppMin: 'MPP voltage min.', f_vmppMax: 'MPP voltage max.',
+      f_imax: 'Max. current per tracker', f_iscMax: 'Max. Isc per tracker', f_pmaxT: 'Max. power per tracker', f_eta: 'Efficiency', f_tmin: 'Lowest temperature', f_tcell: 'Max. cell temperature', f_losses: 'Other losses',
+      f_cFace: 'Cable exit face', f_cP: 'Exit from left edge', f_cDown: 'Run down the facade', f_cIn: 'Run indoors', f_cs: 'Cross-section',
+      f_quality: 'Accuracy', q_fast: 'fast (60 min, every 4th day)', q_normal: 'normal (30 min, every 2nd day)', q_fine: 'fine (15 min, every day)',
+      run_hint: 'All calculations run locally in your browser. No data is uploaded.',
+      face_A: 'Face A', face_B: 'Face B', modules: 'modules', module: 'Module',
+      i_orient: 'Orientation', i_slope: 'Rafter length (eave–ridge)', i_eaveH: 'Eave height (drip edge)', i_roofLen: 'Roof length incl. overhang',
+      i_nRange: 'String length: {a} to {b} modules', i_parallel: 'Parallel strings per tracker: up to {p}',
+      layout_fixed: 'Layout frozen', list_obstacles: 'Fixtures', list_neighbors: 'Neighbouring buildings', list_trees: 'Trees',
+      empty_obstacles: 'No fixtures entered.', empty_neighbors: 'No neighbouring buildings. Tip: OpenStreetMap import.', empty_trees: 'No trees entered.',
+      c_face: 'Face', c_kind: 'Type', c_label: 'Name', c_fromLeft: 'from gable', c_fromEave: 'from eave wall', c_width: 'Width', c_depth: 'Depth', c_top: 'Top', c_clear: 'Clearance', c_mode: 'measured',
+      c_name: 'Name', c_e: 'E (m)', c_n: 'N (m)', c_rlen: 'Length', c_rwid: 'Depth', c_rrot: 'Rotation', c_base: 'Ground ±', c_wallH: 'Eave height', c_roof: 'Roof', c_ridgeH: 'Ridge height', c_ridgeDir: 'Ridge',
+      c_treeH: 'Height', c_crown: 'Crown radius', c_treeType: 'Type',
+      kind_chimney: 'Chimney', kind_window: 'Roof window', kind_vent: 'Vent', kind_other: 'Other', mode_plan: 'horizontal', mode_roof: 'on the roof face',
+      roof_gable: 'Gable', roof_hip: 'Hip', roof_flat: 'Flat', rd_long: 'along', rd_short: 'across', tree_dec: 'Deciduous', tree_con: 'Conifer',
+      osm_fp: 'Footprint from OpenStreetMap', pts: 'points',
+      clim_est: 'Estimated from latitude. For accurate results enter the monthly values of your site from PVGIS:', clim_own: 'Own values.',
+      clim_ghi: 'Global irradiation', clim_fd: 'Diffuse fraction', clim_ta: 'Temperature', clim_reset: 'Reset to estimate', clim_paste: 'Paste 12 monthly values…', clim_paste_prompt: 'Paste 12 monthly global irradiation values (kWh/m²), e.g. PVGIS “H(h)_m”:',
+      eave: 'Eave', ridge: 'Ridge', confirm_replace: 'Replace the current project? Unsaved changes will be lost.',
+      warn_layout: 'Modules outside the margins or too close to fixtures: {list}',
+      no_modules: 'No modules on the roof.', no_result: 'No result yet. Run the annual simulation in step 8 (left).', no_webgl: 'WebGL is not available in this browser. 2D plans and calculations still work.',
+      prog_shade: 'Shading … {p} %', prog_strings: 'Optimising strings …', prog_done: 'Done in {s} s',
+      k_modules: 'Modules', k_yield: 'Yield', k_per_year: 'per year (strings)', k_specific: 'Specific yield', k_shading: 'Shading loss', k_shading_sub: 'from neighbours, trees, fixtures', k_micro: 'Module MPPT', k_micro_sub: 'extra yield with micro inverters/optimisers',
+      r_monthly: 'Monthly yield per roof face (kWh)', r_strings: 'String plan · {inv}', r_tracker: 'Tracker', r_order: 'Modules (order + → −)', r_peak: 'Peak',
+      r_strings_note: '{a} to {b} modules per string are permitted. Modules are assigned to strings to maximise the annual yield under shading.',
+      r_compare: 'Comparison of wiring options', r_variant: 'Option', r_diff: 'Difference', r_v_strings: 'Strings as above', r_v_micro: 'each module with its own MPPT (micro inverter/optimiser)', r_v_unshaded: 'theoretically without any shading',
+      r_bypass_note: 'Every module is split into sections with bypass diodes. Partial shade only bypasses the affected section; the string keeps its full current. The tracker finds the global maximum. That is why the gap to module-level MPPT is usually small.',
+      r_cables: 'Cable lengths per string', r_bridge: 'Jumpers', r_cable_note: 'Rough lengths to the inverter incl. reserve, cross-section {cs} mm². Route: under the modules to the exit at the eave, other roof face over the ridge.',
+      r_export: 'Export', r_loss: 'Annual loss from shading', r_kwh_mod: 'Yield with module MPPT (kWh)',
+      r_method: 'Method: NOAA sun position, clear-sky daily course scaled to monthly irradiation, Hay–Davies sky model, shadow per cell, bypass-diode model. The result is a planning estimate, not a yield certificate.',
+      warn_clim: 'Climate data are estimated. Enter PVGIS monthly values in step 7 for reliable yields.',
+      warn_unassigned: 'Not connected (does not fit the voltage limits): modules {list}',
+      err_trackers: 'The inverter has too few trackers or the string limits do not match the module counts.', err_file: 'Could not read the file:',
+      csv_face: 'Face', csv_orient: 'Orientation', csv_tracker: 'Tracker', csv_string: 'String', csv_p: 'from left edge (m)', csv_s: 'from eave along slope (m)', csv_w: 'Width (m)', csv_h: 'Length along slope (m)', csv_loss: 'Shading (%)', csv_kwh: 'Yield (kWh)',
+      rep_sub: 'PV design · {lat}, {lon}',
+      osm_title: 'Import buildings from OpenStreetMap', osm_intro: 'Search an address or enter coordinates, load buildings and click your house. All other buildings become neighbours with estimated heights – please check the heights.',
+      osm_search_ph: 'Address, e.g. 1 Example Street, Example Town', osm_search: 'Search', osm_radius: 'Radius (m)', osm_load: 'Load buildings',
+      osm_click: 'Clicking a building marks it as:', osm_own: 'my house / my half', osm_att: 'same roof (attached)', osm_ign: 'ignore', osm_nb: 'neighbour',
+      osm_across: 'Ridge across the long side', osm_apply: 'Apply', osm_empty: 'No buildings loaded yet.', osm_searching: 'Searching …', osm_nohit: 'Nothing found.',
+      osm_loading: 'Loading buildings …', osm_found: '{n} buildings found.', osm_none: 'No buildings within the radius.', osm_err: 'Error: {e}', osm_need_own: 'Please click your house first.',
+      foot_disclaimer: 'PV Roof Planner – planning aid without warranty. Have structure, fire safety and electrical installation checked by professionals.'
+    }
+  };
+
+  const I = {
+    lang: 'de',
+    dict: D,
+    init() {
+      let l = null;
+      try { l = localStorage.getItem('pvrp.lang'); } catch (e) { /* ignore */ }
+      if (!l) l = ((typeof navigator !== 'undefined' && navigator.language) || 'de').slice(0, 2);
+      I.lang = D[l] ? l : 'en';
+    },
+    setLang(l) { if (D[l]) { I.lang = l; try { localStorage.setItem('pvrp.lang', l); } catch (e) { /* ignore */ } } },
+    t(k, vars) {
+      let s = (D[I.lang] && D[I.lang][k]) || D.en[k] || D.de[k] || k;
+      if (vars) for (const [a, b] of Object.entries(vars)) s = s.split('{' + a + '}').join(b);
+      return s;
+    },
+    apply(rootEl) {
+      const r = rootEl || document;
+      r.documentElement && (r.documentElement.lang = I.lang);
+      for (const el of r.querySelectorAll('[data-i18n]')) el.textContent = I.t(el.dataset.i18n);
+      for (const el of r.querySelectorAll('[data-i18n-ph]')) el.placeholder = I.t(el.dataset.i18nPh);
+    },
+    num(v, d) {
+      if (v === undefined || v === null || isNaN(v)) return '–';
+      return Number(v).toLocaleString(I.lang === 'de' ? 'de-DE' : 'en-GB', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 });
+    },
+    date(d) { return d.toLocaleDateString(I.lang === 'de' ? 'de-DE' : 'en-GB', { day: '2-digit', month: '2-digit', timeZone: 'UTC' }); },
+    months() { return I.lang === 'de' ? ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'] : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; }
+  };
+  PVP.i18n = I;
+  if (typeof module !== 'undefined' && module.exports) module.exports = PVP;
+})(typeof globalThis !== 'undefined' ? globalThis : this);

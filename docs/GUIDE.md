@@ -1,0 +1,14 @@
+# Guide
+
+The app leads you through eight steps (left panel) from the house to the string plan. Inputs are saved automatically in your browser; **Save** downloads the project as JSON, **Open** loads it again.
+
+1. **Location** – easiest via **Buildings from OpenStreetMap…**: search an address, load the buildings, click your house (orange). For semi-detached or terraced houses, click the attached parts with **same roof** (yellow); set irrelevant buildings to **ignore**; **Apply**. Check the heights afterwards – OSM often only knows the number of storeys.
+2. **Building & roof** – face A is the roof face whose orientation you enter (180 = south). Length = gable wall to gable wall, depth = eave wall to eave wall (horizontal, without overhangs). *Own part* = your section along the ridge, measured from the left gable seen from outside face A.
+3. **Roof fixtures** – chimneys, roof windows, vents. Horizontal distances as in the floor plan (from the left gable seen from outside that face, and from the eave wall), or switch “measured” to *on the roof face*. Enter *Top* (height above ground) only for fixtures that cast shadows. Add your neighbour's chimney on a shared roof too.
+4. **Surroundings** – neighbouring buildings as rectangles (centre east/north of your house, length, depth, rotation of the long side, eave height, roof type, ridge height) and trees (position, height, crown radius; deciduous trees let more light through in winter).
+5. **Modules & layout** – datasheet values incl. cells and bypass diodes. The layout is maximised automatically (mixed portrait/landscape rows, margins, clearances). Click a module in 3D or in *Roof faces* to remove it; *Freeze layout* keeps it fixed.
+6. **Inverter & strings** – trackers, strings per tracker, voltage window, current and power limits; the app derives the permitted string length. Set where cables leave the roof and the run down the facade and indoors.
+7. **Climate** – without input the irradiation is estimated from latitude. For accurate yields paste the 12 monthly *H(h)_m* values from [PVGIS](https://re.jrc.ec.europa.eu/pvg_tools/).
+8. **Calculate** – run the annual simulation (“normal” for comparisons, “fine” for the final result). Then explore the 3D view (colour by loss or string, cables, sun & shadows), the shading heat map, and the results with string plan, comparison with module-level MPPT, cable lengths and exports (JSON, CSV, SVG, DXF, printable report).
+
+**Why one shaded module does not throttle the whole string:** modules are split into sections with bypass diodes (usually three). A shaded section is bypassed; the string keeps its full current and loses only that section's voltage, and the tracker searches the global maximum power point. The app models exactly this, which is why micro inverters or optimisers usually gain little – the comparison table shows the figure for your roof.
